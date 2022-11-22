@@ -34,7 +34,7 @@ export default function Game() {
 const Wrapper = styled.section`
 	display: flex;
 	justify-content: space-between;
-	margin-bottom: 70px;
+	margin-bottom: 40px;
 
 	aside {
 		display: flex;
@@ -44,8 +44,7 @@ const Wrapper = styled.section`
 	}
 
 	img {
-		width: 400px;
-		height: 466px;
+		width: 300px;
 	}
 
 	button {
@@ -61,13 +60,13 @@ const Wrapper = styled.section`
 `;
 
 const UnknownWord = styled.div`
-  display: flex;
-  gap: 10px;
-  justify-content: flex-end;
+	display: flex;
+	gap: 10px;
+	justify-content: flex-end;
 
-  >span{
-    font-family: 'Noto Sans', sans-serif;
-    font-size: 50px;
-    font-weight: 700;
-  }
-`
+	> span {
+		font-family: "Noto Sans", sans-serif;
+		font-size: 50px;
+		font-weight: 700;
+	}
+`;

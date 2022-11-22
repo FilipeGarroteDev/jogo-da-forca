@@ -18,7 +18,7 @@ export const GlobalStyle = createGlobalStyle`
 
   body{
     font-family: 'Roboto', sans-serif;
-    margin: 89px 50px;
+    margin: 30px 100px;
   }
 
   .root{
