@@ -16,7 +16,11 @@ export default function Game({
 	setErrorCounter,
 	selectedLetters,
 	setSelectedLetters,
+	winGame,
 }) {
+	const [lossGame, setLossGame] = useState(false);
+  console.log(word)
+
 	function sortWord() {
 		setErrorCounter(0);
 		setSelectedLetters([]);
@@ -26,6 +30,7 @@ export default function Game({
 	}
 
 	function handleImage() {
+		if (lossGame) return forca6;
 		switch (errorCounter) {
 			case 0:
 				return forca0;
@@ -40,6 +45,7 @@ export default function Game({
 			case 5:
 				return forca5;
 			default:
+				setLossGame(true);
 				return forca6;
 		}
 	}
@@ -52,12 +58,13 @@ export default function Game({
 				{word.length === 0 ? (
 					""
 				) : (
-					<UnknownWord>
+					<UnknownWord lossGame={lossGame} winGame={winGame}>
 						{word.map((letter) =>
-							selectedLetters.find((element) => element === letter) ? (
+							selectedLetters.find((element) => element === letter) ||
+							lossGame ? (
 								<span>{letter}</span>
 							) : (
-								<span>_</span>
+								<p>_</p>
 							)
 						)}
 					</UnknownWord>
@@ -100,9 +107,12 @@ const UnknownWord = styled.div`
 	gap: 10px;
 	justify-content: flex-end;
 
-	> span {
+	> span,
+	p {
 		font-family: "Noto Sans", sans-serif;
 		font-size: 50px;
 		font-weight: 700;
+		color: ${(props) =>
+			props.lossGame ? "#FF0000" : props.winGame ? "#27AE60" : "#000000"};
 	}
 `;

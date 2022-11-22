@@ -9,6 +9,7 @@ function App() {
 	const [word, setWord] = useState([]);
 	const [errorCounter, setErrorCounter] = useState(0);
 	const [selectedLetters, setSelectedLetters] = useState([]);
+  const [winGame, setWinGame] = useState(false);
 
 	return (
 		<>
@@ -21,6 +22,7 @@ function App() {
 				selectedLetters={selectedLetters}
 				setErrorCounter={setErrorCounter}
 				setSelectedLetters={setSelectedLetters}
+        winGame={winGame}
 			/>
 			<Letters
 				word={word}
@@ -28,6 +30,7 @@ function App() {
 				errorCounter={errorCounter}
 				selectedLetters={selectedLetters}
 				setSelectedLetters={setSelectedLetters}
+        setWinGame={setWinGame}
 			/>
 			<Guess word={word} />
 		</>

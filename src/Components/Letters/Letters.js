@@ -8,6 +8,7 @@ export default function Letters({
 	errorCounter,
 	selectedLetters,
 	setSelectedLetters,
+	setWinGame,
 }) {
 	return (
 		<Keyboard>
@@ -19,6 +20,7 @@ export default function Letters({
 					errorCounter={errorCounter}
 					selectedLetters={selectedLetters}
 					setSelectedLetters={setSelectedLetters}
+					setWinGame={setWinGame}
 				/>
 			))}
 		</Keyboard>
@@ -32,21 +34,36 @@ function LetterBox({
 	errorCounter,
 	selectedLetters,
 	setSelectedLetters,
+	setWinGame,
 }) {
-  const [isClicked, setIsClicked] = useState(false)
+	const [isClicked, setIsClicked] = useState(false);
 
 	function selectLetter() {
 		if (word.length === 0 || isClicked) return;
 		setSelectedLetters([...selectedLetters, letter]);
-		const hasLetter = word.find(element => element === letter);
+		const hasLetter = word.find((element) => element === letter);
 		if (!hasLetter) {
 			setErrorCounter(errorCounter + 1);
 		}
-    setIsClicked(true)
+		setIsClicked(true);
+		setTimeout(verifyWin, 50);
+	}
+
+	function verifyWin() {
+    console.log(word.length)
+    console.log(document.querySelectorAll("span").length)
+		if (document.querySelectorAll("span").length === word.length) {
+			console.log("deu");
+			setWinGame(true);
+		}
 	}
 
 	return (
-		<Letter wordLength={word.length} isClicked={isClicked} onClick={selectLetter}>
+		<Letter
+			wordLength={word.length}
+			isClicked={isClicked}
+			onClick={selectLetter}
+		>
 			{letter}
 		</Letter>
 	);
@@ -70,7 +87,8 @@ const Letter = styled.div`
 	border-radius: 3px;
 	background-color: ${(props) =>
 		props.wordLength === 0 || props.isClicked ? "#9FAAB5" : "#e1ecf4"};
-	color: ${(props) => (props.wordLength === 0 || props.isClicked ? "#798A9F" : "#7aa7c7")};
+	color: ${(props) =>
+		props.wordLength === 0 || props.isClicked ? "#798A9F" : "#7aa7c7"};
 	font-size: 16px;
 	font-weight: 700;
 `;
