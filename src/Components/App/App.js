@@ -9,9 +9,9 @@ function App() {
 	const [word, setWord] = useState([]);
 	const [errorCounter, setErrorCounter] = useState(0);
 	const [selectedLetters, setSelectedLetters] = useState([]);
-  const [winGame, setWinGame] = useState(false);
-  const [lossGame, setLossGame] = useState(false);
-
+	const [winGame, setWinGame] = useState(false);
+	const [lossGame, setLossGame] = useState(false);
+	const [isDisabled, setIsDisabled] = useState(false);
 
 	return (
 		<>
@@ -24,9 +24,11 @@ function App() {
 				selectedLetters={selectedLetters}
 				setErrorCounter={setErrorCounter}
 				setSelectedLetters={setSelectedLetters}
-        winGame={winGame}
-        lossGame={lossGame}
-        setLossGame={setLossGame}
+				winGame={winGame}
+				lossGame={lossGame}
+				setLossGame={setLossGame}
+				setIsDisabled={setIsDisabled}
+				setWinGame={setWinGame}
 			/>
 			<Letters
 				word={word}
@@ -34,9 +36,16 @@ function App() {
 				errorCounter={errorCounter}
 				selectedLetters={selectedLetters}
 				setSelectedLetters={setSelectedLetters}
-        setWinGame={setWinGame}
+				setWinGame={setWinGame}
+				isDisabled={isDisabled}
 			/>
-			<Guess word={word} setWinGame={setWinGame} setLossGame={setLossGame}/>
+			<Guess
+				word={word}
+				setWinGame={setWinGame}
+				setLossGame={setLossGame}
+				setIsDisabled={setIsDisabled}
+				isDisabled={isDisabled}
+			/>
 		</>
 	);
 }

@@ -1,4 +1,3 @@
-import { useState } from "react";
 import styled from "styled-components";
 import { alphabet } from "../../Common/database";
 
@@ -9,12 +8,15 @@ export default function Letters({
 	selectedLetters,
 	setSelectedLetters,
 	setWinGame,
+  isDisabled
 }) {
 	return (
 		<Keyboard>
 			{alphabet.map((letter) => (
 				<LetterBox
-          isClicked={selectedLetters.find(element => element === letter) ? true : false}
+					isClicked={
+						selectedLetters.find((element) => element === letter) ? true : false
+					}
 					letter={letter}
 					word={word}
 					setErrorCounter={setErrorCounter}
@@ -22,6 +24,7 @@ export default function Letters({
 					selectedLetters={selectedLetters}
 					setSelectedLetters={setSelectedLetters}
 					setWinGame={setWinGame}
+          isDisabled={isDisabled}
 				/>
 			))}
 		</Keyboard>
@@ -36,11 +39,11 @@ function LetterBox({
 	selectedLetters,
 	setSelectedLetters,
 	setWinGame,
-  isClicked
+	isClicked,
+  isDisabled
 }) {
-
 	function selectLetter() {
-		if (word.length === 0 || isClicked) return;
+		if (word.length === 0 || isClicked || isDisabled) return;
 		setSelectedLetters([...selectedLetters, letter]);
 		const hasLetter = word.find((element) => element === letter);
 		if (!hasLetter) {
@@ -60,6 +63,7 @@ function LetterBox({
 			wordLength={word.length}
 			isClicked={isClicked}
 			onClick={selectLetter}
+      isDisabled={isDisabled}
 		>
 			{letter}
 		</Letter>
@@ -83,9 +87,13 @@ const Letter = styled.div`
 	border: 1px solid #7aa7c7;
 	border-radius: 3px;
 	background-color: ${(props) =>
-		props.wordLength === 0 || props.isClicked ? "#9FAAB5" : "#e1ecf4"};
+		props.wordLength === 0 || props.isClicked || props.isDisabled
+			? "#9FAAB5"
+			: "#e1ecf4"};
 	color: ${(props) =>
-		props.wordLength === 0 || props.isClicked ? "#798A9F" : "#7aa7c7"};
+		props.wordLength === 0 || props.isClicked || props.isDisabled
+			? "#798A9F"
+			: "#7aa7c7"};
 	font-size: 16px;
 	font-weight: 700;
 `;

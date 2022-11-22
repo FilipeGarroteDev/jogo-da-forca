@@ -1,27 +1,37 @@
 import { useState } from "react";
 import styled from "styled-components";
 
-export default function Guess({ word, setWinGame, setLossGame }) {
+export default function Guess({
+	word,
+	setWinGame,
+	setLossGame,
+	setIsDisabled,
+	isDisabled,
+}) {
 	const [guessedWord, setGuessedWord] = useState("");
 
 	function handleWord(e) {
 		setGuessedWord(e.target.value);
 	}
 
-  function guessAWord() {
-		const jointedWord = word.join("")
-    if(jointedWord === guessedWord){
-      setWinGame(true)
-    } else {
-      setLossGame(true)
-    }
+	function guessAWord() {
+		const jointedWord = word.join("");
+		if (jointedWord === guessedWord) {
+			setGuessedWord("");
+			setWinGame(true);
+			setIsDisabled(true);
+		} else {
+			setGuessedWord("");
+			setLossGame(true);
+			setIsDisabled(true);
+		}
 	}
 
 	return (
-		<Wrapper wordLength={word.length}>
+		<Wrapper wordLength={word.length} isDisabled={isDisabled}>
 			<h2>Já sei a palavra!</h2>
 			<input
-				disabled={word.length === 0 ? true : false}
+				disabled={word.length === 0 || isDisabled ? true : false}
 				value={guessedWord}
 				onChange={handleWord}
 			></input>
@@ -56,8 +66,9 @@ const Wrapper = styled.section`
 		border: 1px solid #7aa7c7;
 		border-radius: 3px;
 		background-color: ${(props) =>
-			props.wordLength === 0 ? "#9FAAB5" : "#e1ecf4"};
-		color: ${(props) => (props.wordLength === 0 ? "#798A9F" : "#7aa7c7")};
+			props.wordLength === 0 || props.isDisabled ? "#9FAAB5" : "#e1ecf4"};
+		color: ${(props) =>
+			props.wordLength === 0 || props.isDisabled ? "#798A9F" : "#7aa7c7"};
 		font-size: 16px;
 		font-weight: 700;
 	}

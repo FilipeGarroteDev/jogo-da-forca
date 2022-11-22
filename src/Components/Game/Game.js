@@ -1,4 +1,3 @@
-import { useState } from "react";
 import styled from "styled-components";
 import forca0 from "../../assets/forca0.png";
 import forca1 from "../../assets/forca1.png";
@@ -16,13 +15,18 @@ export default function Game({
 	setErrorCounter,
 	selectedLetters,
 	setSelectedLetters,
+	setWinGame,
 	winGame,
 	lossGame,
 	setLossGame,
+	setIsDisabled,
 }) {
 	console.log(word);
 
 	function sortWord() {
+		setIsDisabled(false);
+		setWinGame(false);
+		setLossGame(false);
 		setErrorCounter(0);
 		setSelectedLetters([]);
 		words.sort(() => Math.random() - 0.5);
@@ -46,6 +50,7 @@ export default function Game({
 			case 5:
 				return forca5;
 			default:
+				setIsDisabled(true);
 				setLossGame(true);
 				return forca6;
 		}
