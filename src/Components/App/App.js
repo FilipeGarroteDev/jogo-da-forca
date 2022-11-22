@@ -8,20 +8,26 @@ import { useState } from "react";
 function App() {
 	const [word, setWord] = useState([]);
 	const [errorCounter, setErrorCounter] = useState(0);
-  const [selectedLetters, setSelectedLetters] = useState([]);
-	console.log(selectedLetters);
+	const [selectedLetters, setSelectedLetters] = useState([]);
 
 	return (
 		<>
 			<Reset />
 			<GlobalStyle />
-			<Game word={word} setWord={setWord} errorCounter={errorCounter} selectedLetters={selectedLetters} />
+			<Game
+				word={word}
+				setWord={setWord}
+				errorCounter={errorCounter}
+				selectedLetters={selectedLetters}
+				setErrorCounter={setErrorCounter}
+				setSelectedLetters={setSelectedLetters}
+			/>
 			<Letters
 				word={word}
 				setErrorCounter={setErrorCounter}
 				errorCounter={errorCounter}
-        selectedLetters={selectedLetters}
-        setSelectedLetters={setSelectedLetters}
+				selectedLetters={selectedLetters}
+				setSelectedLetters={setSelectedLetters}
 			/>
 			<Guess word={word} />
 		</>

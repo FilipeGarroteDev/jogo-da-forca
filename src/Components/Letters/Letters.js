@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styled from "styled-components";
 import { alphabet } from "../../Common/database";
 
@@ -32,15 +33,23 @@ function LetterBox({
 	selectedLetters,
 	setSelectedLetters,
 }) {
+  const [isClicked, setIsClicked] = useState(false)
+
 	function selectLetter() {
+		if (word.length === 0 || isClicked) return;
 		setSelectedLetters([...selectedLetters, letter]);
-		const hasLetter = word.indexOf(letter);
-		if (hasLetter === -1) {
+		const hasLetter = word.find(element => element === letter);
+		if (!hasLetter) {
 			setErrorCounter(errorCounter + 1);
 		}
+    setIsClicked(true)
 	}
 
-	return <Letter onClick={selectLetter}>{letter}</Letter>;
+	return (
+		<Letter wordLength={word.length} isClicked={isClicked} onClick={selectLetter}>
+			{letter}
+		</Letter>
+	);
 }
 
 const Keyboard = styled.section`
@@ -59,8 +68,9 @@ const Letter = styled.div`
 	height: 40px;
 	border: 1px solid #7aa7c7;
 	border-radius: 3px;
-	background-color: #e1ecf4;
-	color: #7aa7c7;
+	background-color: ${(props) =>
+		props.wordLength === 0 || props.isClicked ? "#9FAAB5" : "#e1ecf4"};
+	color: ${(props) => (props.wordLength === 0 || props.isClicked ? "#798A9F" : "#7aa7c7")};
 	font-size: 16px;
 	font-weight: 700;
 `;

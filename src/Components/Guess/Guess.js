@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
-export default function Guess() {
+export default function Guess({ word }) {
 	return (
-		<Wrapper>
+		<Wrapper wordLength={word.length}>
 			<h2>Já sei a palavra!</h2>
-			<input></input>
+			<input disabled={word.length === 0 ? true : false}></input>
 			<button>Chutar</button>
 		</Wrapper>
 	);
@@ -27,6 +27,7 @@ const Wrapper = styled.section`
 		border: 1px solid #cccccc;
 		border-radius: 3px;
 		box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25);
+		outline: none;
 	}
 
 	> button {
@@ -34,8 +35,9 @@ const Wrapper = styled.section`
 		height: 40px;
 		border: 1px solid #7aa7c7;
 		border-radius: 3px;
-		background-color: #e1ecf4;
-		color: #7aa7c7;
+		background-color: ${(props) =>
+			props.wordLength === 0 ? "#9FAAB5" : "#e1ecf4"};
+		color: ${(props) => (props.wordLength === 0 ? "#798A9F" : "#7aa7c7")};
 		font-size: 16px;
 		font-weight: 700;
 	}
