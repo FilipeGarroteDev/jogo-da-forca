@@ -1,7 +1,13 @@
 import styled from "styled-components";
 import { alphabet } from "../../Common/database";
 
-export default function Letters({ word, setErrorCounter, errorCounter }) {
+export default function Letters({
+	word,
+	setErrorCounter,
+	errorCounter,
+	selectedLetters,
+	setSelectedLetters,
+}) {
 	return (
 		<Keyboard>
 			{alphabet.map((letter) => (
@@ -10,18 +16,26 @@ export default function Letters({ word, setErrorCounter, errorCounter }) {
 					word={word}
 					setErrorCounter={setErrorCounter}
 					errorCounter={errorCounter}
+					selectedLetters={selectedLetters}
+					setSelectedLetters={setSelectedLetters}
 				/>
 			))}
 		</Keyboard>
 	);
 }
 
-function LetterBox({ letter, word, setErrorCounter, errorCounter }) {
+function LetterBox({
+	letter,
+	word,
+	setErrorCounter,
+	errorCounter,
+	selectedLetters,
+	setSelectedLetters,
+}) {
 	function selectLetter() {
+		setSelectedLetters([...selectedLetters, letter]);
 		const hasLetter = word.indexOf(letter);
-		if (hasLetter > -1) {
-			console.log(hasLetter);
-		} else {
+		if (hasLetter === -1) {
 			setErrorCounter(errorCounter + 1);
 		}
 	}

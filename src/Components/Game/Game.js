@@ -9,7 +9,7 @@ import forca5 from "../../assets/forca5.png";
 import forca6 from "../../assets/forca6.png";
 import { words } from "../../Common/database";
 
-export default function Game({ word, setWord, errorCounter }) {
+export default function Game({ word, setWord, errorCounter, selectedLetters }) {
 	function sortWord() {
 		words.sort(() => Math.random() - 0.5);
 		const splittedWord = words[0].split("");
@@ -44,9 +44,7 @@ export default function Game({ word, setWord, errorCounter }) {
 					""
 				) : (
 					<UnknownWord>
-						{word.map(() => (
-							<span>_</span>
-						))}
+						{word.map(letter => selectedLetters.find(element => element === letter) ? <span>{letter}</span> : <span>_</span>)}
 					</UnknownWord>
 				)}
 			</aside>
