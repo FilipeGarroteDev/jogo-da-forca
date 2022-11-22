@@ -1,11 +1,31 @@
+import { useState } from "react";
 import styled from "styled-components";
 
-export default function Guess({ word }) {
+export default function Guess({ word, setWinGame, setLossGame }) {
+	const [guessedWord, setGuessedWord] = useState("");
+
+	function handleWord(e) {
+		setGuessedWord(e.target.value);
+	}
+
+  function guessAWord() {
+		const jointedWord = word.join("")
+    if(jointedWord === guessedWord){
+      setWinGame(true)
+    } else {
+      setLossGame(true)
+    }
+	}
+
 	return (
 		<Wrapper wordLength={word.length}>
 			<h2>Já sei a palavra!</h2>
-			<input disabled={word.length === 0 ? true : false}></input>
-			<button>Chutar</button>
+			<input
+				disabled={word.length === 0 ? true : false}
+				value={guessedWord}
+				onChange={handleWord}
+			></input>
+			<button onClick={guessAWord}>Chutar</button>
 		</Wrapper>
 	);
 }

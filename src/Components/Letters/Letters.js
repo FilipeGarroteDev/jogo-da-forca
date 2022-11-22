@@ -14,6 +14,7 @@ export default function Letters({
 		<Keyboard>
 			{alphabet.map((letter) => (
 				<LetterBox
+          isClicked={selectedLetters.find(element => element === letter) ? true : false}
 					letter={letter}
 					word={word}
 					setErrorCounter={setErrorCounter}
@@ -35,8 +36,8 @@ function LetterBox({
 	selectedLetters,
 	setSelectedLetters,
 	setWinGame,
+  isClicked
 }) {
-	const [isClicked, setIsClicked] = useState(false);
 
 	function selectLetter() {
 		if (word.length === 0 || isClicked) return;
@@ -45,15 +46,11 @@ function LetterBox({
 		if (!hasLetter) {
 			setErrorCounter(errorCounter + 1);
 		}
-		setIsClicked(true);
-		setTimeout(verifyWin, 50);
+		setTimeout(verifyWin, 5);
 	}
 
 	function verifyWin() {
-    console.log(word.length)
-    console.log(document.querySelectorAll("span").length)
 		if (document.querySelectorAll("span").length === word.length) {
-			console.log("deu");
 			setWinGame(true);
 		}
 	}

@@ -17,9 +17,10 @@ export default function Game({
 	selectedLetters,
 	setSelectedLetters,
 	winGame,
+	lossGame,
+	setLossGame,
 }) {
-	const [lossGame, setLossGame] = useState(false);
-  console.log(word)
+	console.log(word);
 
 	function sortWord() {
 		setErrorCounter(0);
@@ -61,7 +62,8 @@ export default function Game({
 					<UnknownWord lossGame={lossGame} winGame={winGame}>
 						{word.map((letter) =>
 							selectedLetters.find((element) => element === letter) ||
-							lossGame ? (
+							lossGame ||
+							winGame ? (
 								<span>{letter}</span>
 							) : (
 								<p>_</p>
