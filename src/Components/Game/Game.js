@@ -1,13 +1,31 @@
+import { useState } from "react";
 import styled from "styled-components";
 import initialImage from "../../assets/forca0.png";
+import { words } from "../../Common/database";
 
 export default function Game() {
+	const [word, setWord] = useState([]);
+
+	function sortWord() {
+		words.sort(() => Math.random() - 0.5);
+		const splittedWord = words[0].split("");
+		setWord(splittedWord);
+	}
+
 	return (
 		<Wrapper>
 			<img src={initialImage} alt="hangmanImage" />
 			<aside>
-				<button>Escolher Palavra</button>
-				<div>_ _ _ _ _ _ _ _ _</div>
+				<button onClick={sortWord}>Escolher Palavra</button>
+				{word.length === 0 ? (
+					""
+				) : (
+					<UnknownWord>
+						{word.map((element) => (
+							<span>_</span>
+						))}
+					</UnknownWord>
+				)}
 			</aside>
 		</Wrapper>
 	);
@@ -40,9 +58,16 @@ const Wrapper = styled.section`
 		font-weight: 700;
 		font-size: 20px;
 	}
-
-	> div {
-		font-weight: 700;
-		font-size: 50px;
-	}
 `;
+
+const UnknownWord = styled.div`
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+
+  >span{
+    font-family: 'Noto Sans', sans-serif;
+    font-size: 50px;
+    font-weight: 700;
+  }
+`
