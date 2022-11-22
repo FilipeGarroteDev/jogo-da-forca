@@ -8,7 +8,8 @@ export default function Letters({
 	selectedLetters,
 	setSelectedLetters,
 	setWinGame,
-  isDisabled
+	isDisabled,
+	setIsDisabled,
 }) {
 	return (
 		<Keyboard>
@@ -24,7 +25,8 @@ export default function Letters({
 					selectedLetters={selectedLetters}
 					setSelectedLetters={setSelectedLetters}
 					setWinGame={setWinGame}
-          isDisabled={isDisabled}
+					isDisabled={isDisabled}
+					setIsDisabled={setIsDisabled}
 				/>
 			))}
 		</Keyboard>
@@ -40,7 +42,8 @@ function LetterBox({
 	setSelectedLetters,
 	setWinGame,
 	isClicked,
-  isDisabled
+	isDisabled,
+	setIsDisabled,
 }) {
 	function selectLetter() {
 		if (word.length === 0 || isClicked || isDisabled) return;
@@ -55,6 +58,7 @@ function LetterBox({
 	function verifyWin() {
 		if (document.querySelectorAll("span").length === word.length) {
 			setWinGame(true);
+			setIsDisabled(true);
 		}
 	}
 
@@ -63,7 +67,7 @@ function LetterBox({
 			wordLength={word.length}
 			isClicked={isClicked}
 			onClick={selectLetter}
-      isDisabled={isDisabled}
+			isDisabled={isDisabled}
 		>
 			{letter}
 		</Letter>

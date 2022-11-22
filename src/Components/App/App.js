@@ -37,6 +37,7 @@ function App() {
 				selectedLetters={selectedLetters}
 				setSelectedLetters={setSelectedLetters}
 				setWinGame={setWinGame}
+				setIsDisabled={setIsDisabled}
 				isDisabled={isDisabled}
 			/>
 			<Guess
