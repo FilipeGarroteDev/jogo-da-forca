@@ -4,6 +4,7 @@ import { GlobalStyle } from "../../Common/GlobalStyle.js";
 import Letters from "../Letters/Letters";
 import Guess from "../Guess/Guess";
 import { useState } from "react";
+import { HangmanContext } from "../../Contexts/hangmanContext";
 
 function App() {
 	const [word, setWord] = useState([]);
@@ -14,40 +15,28 @@ function App() {
 	const [isDisabled, setIsDisabled] = useState(false);
 
 	return (
-		<>
+		<HangmanContext.Provider
+			value={{
+				word,
+				setWord,
+				errorCounter,
+				setErrorCounter,
+				selectedLetters,
+				setSelectedLetters,
+				winGame,
+				setWinGame,
+				lossGame,
+				setLossGame,
+				isDisabled,
+				setIsDisabled,
+			}}
+		>
 			<Reset />
 			<GlobalStyle />
-			<Game
-				word={word}
-				setWord={setWord}
-				errorCounter={errorCounter}
-				selectedLetters={selectedLetters}
-				setErrorCounter={setErrorCounter}
-				setSelectedLetters={setSelectedLetters}
-				winGame={winGame}
-				lossGame={lossGame}
-				setLossGame={setLossGame}
-				setIsDisabled={setIsDisabled}
-				setWinGame={setWinGame}
-			/>
-			<Letters
-				word={word}
-				setErrorCounter={setErrorCounter}
-				errorCounter={errorCounter}
-				selectedLetters={selectedLetters}
-				setSelectedLetters={setSelectedLetters}
-				setWinGame={setWinGame}
-				setIsDisabled={setIsDisabled}
-				isDisabled={isDisabled}
-			/>
-			<Guess
-				word={word}
-				setWinGame={setWinGame}
-				setLossGame={setLossGame}
-				setIsDisabled={setIsDisabled}
-				isDisabled={isDisabled}
-			/>
-		</>
+			<Game />
+			<Letters />
+			<Guess />
+		</HangmanContext.Provider>
 	);
 }
 

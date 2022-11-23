@@ -1,3 +1,4 @@
+import { useContext } from "react";
 import styled from "styled-components";
 import forca0 from "../../assets/forca0.png";
 import forca1 from "../../assets/forca1.png";
@@ -7,21 +8,22 @@ import forca4 from "../../assets/forca4.png";
 import forca5 from "../../assets/forca5.png";
 import forca6 from "../../assets/forca6.png";
 import { words } from "../../Common/database";
+import { HangmanContext } from "../../Contexts/hangmanContext";
 
-export default function Game({
-	word,
-	setWord,
-	errorCounter,
-	setErrorCounter,
-	selectedLetters,
-	setSelectedLetters,
-	setWinGame,
-	winGame,
-	lossGame,
-	setLossGame,
-	setIsDisabled,
-}) {
-	console.log(word);
+export default function Game() {
+	const {
+		word,
+		setWord,
+		errorCounter,
+		setErrorCounter,
+		selectedLetters,
+		setSelectedLetters,
+		setWinGame,
+		winGame,
+		lossGame,
+		setLossGame,
+		setIsDisabled,
+	} = useContext(HangmanContext);
 
 	function sortWord() {
 		setIsDisabled(false);

@@ -1,14 +1,11 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import styled from "styled-components";
+import { HangmanContext } from "../../Contexts/hangmanContext";
 
-export default function Guess({
-	word,
-	setWinGame,
-	setLossGame,
-	setIsDisabled,
-	isDisabled,
-}) {
+export default function Guess() {
 	const [guessedWord, setGuessedWord] = useState("");
+	const { word, setWinGame, isDisabled, setLossGame, setIsDisabled } =
+		useContext(HangmanContext);
 
 	function handleWord(e) {
 		setGuessedWord(e.target.value);

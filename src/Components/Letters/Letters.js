@@ -1,16 +1,10 @@
+import { useContext } from "react";
 import styled from "styled-components";
 import { alphabet } from "../../Common/database";
+import { HangmanContext } from "../../Contexts/hangmanContext";
 
-export default function Letters({
-	word,
-	setErrorCounter,
-	errorCounter,
-	selectedLetters,
-	setSelectedLetters,
-	setWinGame,
-	isDisabled,
-	setIsDisabled,
-}) {
+export default function Letters() {
+	const { selectedLetters } = useContext(HangmanContext);
 	return (
 		<Keyboard>
 			{alphabet.map((letter) => (
@@ -19,32 +13,23 @@ export default function Letters({
 						selectedLetters.find((element) => element === letter) ? true : false
 					}
 					letter={letter}
-					word={word}
-					setErrorCounter={setErrorCounter}
-					errorCounter={errorCounter}
-					selectedLetters={selectedLetters}
-					setSelectedLetters={setSelectedLetters}
-					setWinGame={setWinGame}
-					isDisabled={isDisabled}
-					setIsDisabled={setIsDisabled}
 				/>
 			))}
 		</Keyboard>
 	);
 }
 
-function LetterBox({
-	letter,
-	word,
-	setErrorCounter,
-	errorCounter,
-	selectedLetters,
-	setSelectedLetters,
-	setWinGame,
-	isClicked,
-	isDisabled,
-	setIsDisabled,
-}) {
+function LetterBox({ letter, isClicked }) {
+	const {
+		word,
+		errorCounter,
+		setErrorCounter,
+		selectedLetters,
+		setSelectedLetters,
+		setWinGame,
+		isDisabled,
+		setIsDisabled,
+	} = useContext(HangmanContext);
 	function selectLetter() {
 		if (word.length === 0 || isClicked || isDisabled) return;
 		setSelectedLetters([...selectedLetters, letter]);
